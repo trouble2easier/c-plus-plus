@@ -1,0 +1,62 @@
+linux c++开发
+https://blog.csdn.net/s2603898260/article/details/86683528
+gdb调试
+1.
+编译工具：gcc，g++
+安装过程：yum install gcc
+yum install gcc-c++
+yum install gdb
+为了能清晰地看到调试的每一行代码，调用的堆栈信息，变量名和函数名信息，调试程序需含有调试符号信息，使用gcc编译程序时，如果加上-gcc
+选项即可在编译后的程序中保留调试符号信息。举个例子，以下命令将生成一个带调试信息的程序hello_server 
+gcc -g -o hello_server hello_server.c
+用gdb调试程序
+gdb hello_server
+读取符号完毕后，会显示如下信息：
+strip hello_server
+2.
+gdb调试有三种方式
+gdb filename直接调试目标程序（编译成功生成目标二进制文件，调用run）
+gdb attach pid附加进程（对正在运行程序将调试器附加到该程序上，detach使程序与GDb调试器分离）
+gdb filename corename调试core文件（程序崩溃后产生core文件，通过此文件定位崩溃的原因）
+3.gdb常用的调试命令
+4.使用vs管理开源项目
+5.gdb常用命令详解上：
+run运行程序，ctrl +c中断运行
+continue中断后继续
+break添加断点：break filename：linNo在filename文件行号为linNo处添加断点
+backtrace查看当前调用堆栈（缩写bt）
+frame切换到其他堆栈（缩写f）  f 1
+info break查看已添加断点（缩写info b）
+enable 断点编号。启用断点
+disable禁用断点
+delete删除断点
+list查看当前断点处的代码
+print调试过程中查看变量的值，修改变量值
+ptype输出一个变量的类型
+6.GDB常用命令详解(中)----------------------
+info thread查看当前进程的所有线程运行情况
+info args 查看当前函数的参数值
+next调到下一条命令执行（不一定是下一行，是程序逻辑上的下一行）
+step遇到函数直接跳过，不进入函数内部
+util退出程序
+finish正常结束函数
+retrun 指定运行到某一行停下来
+jump跳转到指定行运行
+7、gdb常用命令详解下------------------
+disassemble命令
+set args
+show args
+tbreak
+watch
+display
+disassemble
+7、gdb实用调试技巧上
+将print打印结果显示完整
+让被GDB调试的程序接受信号
+函数明明存在，添加断点时却无效
+
+8、gdn实用调试技巧下
+多线程下禁止线程切换
+条件断点
+使用GDB调试多线程程序
+
