@@ -1,0 +1,41 @@
+//音视频
+熟悉音视频封装及编解码技术，了解主流的多媒体标准，例如TS、MP4封装、H.264、H.265、FLV、MPEG2、MP3、ACC编码等；
+熟悉HTTP/RTP/RTSP/RTMP/HLS等流媒体传输协议，音视频解码模块与流媒体协议的对接处理;
+
+//
+基础知识：
+mp4,flv指的是视频封装格式，包含音视频流之外还包含一些辅助信息以及组织视音频的方式，
+且规定了和播放器的通信协议
+视频协议：rtsp，rtmp，hls，http等
+视频流：
+经过h264等压缩算法压缩的流数据称之为编码流，反之称为原始流。
+帧采取yuv格式
+视频和视频帧：ffmpeg解码套路整理
+将压缩后的视频通过对应的解码算法还原为YUV视频流的过程
+ffmpeg解码流程：
+1.连接和打开视频流：
+int avformat_network_init(void)
+int  avformat_network_init_open_input(AVFormatContext** ps,const char* filename,AVInputFormat* fmt,AVDictionary ** options)
+打印文件基本信息：
+av_dump_format()
+2.定位视频流数据
+int avformat_find_stream_info(AVFormatCOntext**ic,AVDictionary**options)解析视频文件信息
+3.准备解码器
+寻找合适的解码器，拷贝解码器，打开解码器
+AVCodec* avcodec——find_decoder(enum AVCodecID id)
+从condec内返回与id匹配到的解码器。
+AVCodecContext* avcodec_alloc_context3(const AVodec* codec)
+int avcodec_parameters_to_context(const AVCodec*codec,const AVCodecParameters*par)
+打开解码器
+avcodec_open2(AVCodecContext*avctx,const AVCodec*codec,AVDictionary**options)
+4.解码
+重复取包，拆包解帧
+包：AVPacket保存解码后的多媒体数据，包括露媒体和附加信息。
+
+帧：AVFrame保存解码后，帧本身的数据和附加信息
+其他注意点：
+1.帧转码
+int sws_scale(struct SwsContext* c,...)
+2帧输出
+3刷新缓冲区
+4资源释放
