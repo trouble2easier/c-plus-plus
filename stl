@@ -1,0 +1,48 @@
+//stl编程
+关于set和map
+set表示集合(任何元素只能出现一次或0次)，map表示映射
+#include<map>
+set<int>s;
+s.insert(1);
+s.size();
+s.max_size();
+set<int >s;
+set<int>::const_iterator iter;
+set<int>::iterator first;
+set<int>::iterator second;
+s.erase(s.begin());
+first=s.begin();
+second=s.begin();
+second++;
+second++;
+s.erase(first,second);
+for(iter=s.begin();iter<s.end();++iter)
+{
+    cout<<*iter<<endl;
+}
+int array[]={1,2,3};
+set<int> a(a,a+3);
+set<int>::iterator iter;
+if(iter=s.find(2)==s.end())
+{
+   cout<<*iter<<endl;
+}
+pair<set<int>::iterator,bool>pr;
+pr=s.insert(5);
+if(pr.second)
+{
+   cout<<*pr.first<<endl;
+}
+iterator代表插入位置
+pair<set<int>::iterator,bool>pr;
+
+struct info
+{
+string name;
+float score;
+bool operator<(const Info &a) const_iterator{
+return a.score<score;
+}
+}
+set<Info>s;
+set<Info>::iterator it;
