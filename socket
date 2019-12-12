@@ -1,0 +1,43 @@
+Socket编程
+/*
+常用API
+创建套接字-socket()
+SOCKET PASCAL FAR socket(int af,int type,int protocol)
+指定本地址-bind()
+int PASCAL FAR bind(SOCKET s,const struct sockaddr FAR*name,int namelen);
+建立套接字连接-connect()与accept()
+int PASCAL FAR connect(SOCKET s,const struct sockaddr FAR *name ,int namelen);
+SOCKET PASCAL FAR accept(SOCKET s,struct sockaddr FAR* addr,int FAR*addrlen);
+监听连接-listen()
+int PASCAL FAR listen(SOCKET s,int backlog);
+数据传输-send()与recv()
+int PASCAL FAR send(SOCKET s,const char FAR*buf,int len,int flags);
+int PASCAL FAR recv(SOCKET s,char FAR *buf,int len,int flags);
+输入输出多路复用-select()
+int PASCAL FAR select(int nfds,fd set FAR*redfds,fd_set FAR*writefds,fd_set FAR*exceptfds,const struct timeval FAR*timeout);
+关闭套接字
+BOOL PASCAL FAR closesocket(SOCKET S);
+*/
+#include<winsock2.h>
+#include<stdio.h>
+#pragma comment(lib,"ws2_32.lib")
+int main()
+{
+	int err;
+	WORD versonRequired;
+	WSADATA wsaData;
+	versionRequired=MAKEWORD(1,1);
+	err=WSAStartup(versionRequired,&wsaData);//协议库的版本信息
+	//WSAStartup与WSACleanup对应
+	if(!err)
+	{
+	printf("客户端嵌套字已经打开");
+	}
+	else
+	{
+	 printf("客户端的嵌套字打开失败");
+	}
+	SOCKET(clientSocket)=socket(AF_INET,SOCK_STREAM,0);
+	//三个参数分别表示socket所处的系统，socket的类型，以及一些其他信息
+	//SOCKET编程中，它定义了一个结构体SOCKDDR_IN来存储计算机的一些信息，像socket的系统，端口号，ip地址等信息，
+}
